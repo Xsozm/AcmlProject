@@ -14,6 +14,7 @@ use SwooleTW\Http\Websocket\Facades\Websocket;
 
 Websocket::on('connect', function ($websocket, Request $request) {
     // called while socket on connect
+    echo "New Visitor to the Website";
 });
 
 Websocket::on('disconnect', function ($websocket) {
