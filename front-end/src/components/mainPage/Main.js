@@ -20,6 +20,11 @@ class Main extends Component {
       this.setState({searchText:event.target.value});
     }
 
+    onClickSearchButton = () => {
+        this.props.searchItems(this.state.searchText);
+        this.context.router.push(`/search/${this.state.searchText}`);
+    }
+
     render (){
         return (
         <div >
@@ -39,10 +44,7 @@ class Main extends Component {
         </div>)
     }
 
-    onClickSearchButton = () => {
-        this.props.searchItems(this.state.searchText);
-        this.context.router.push(`/search/${this.state.searchText}`);
-    }
+
 
 
 

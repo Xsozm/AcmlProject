@@ -11,6 +11,12 @@ class Search extends Component{
       console.log(this.props);
       
     }
+
+    componentWillReceiveProps(nextProps){
+        if(this.props.searchQuery.items)
+        this.setState({items:nextProps.searchQuery.items})
+  
+      }
     render() {
         return(
             <div>

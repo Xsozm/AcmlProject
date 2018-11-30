@@ -6,9 +6,11 @@ import searchIcon from '../../assets/Orion_search.png'
 import sideBarArrow from '../../assets/Orion_angle-down.png'
 import {connect} from 'react-redux';
 import './Header.style.css'
+import {bindActionCreators} from 'redux';
+import {searchItems} from '../../actions/index';
 
 class Header extends Component {
-    state = {loggedin:false,sideBarOpen:false,clientWidth:document.documentElement.clientWidth};
+    state = {loggedin:false,sideBarOpen:false,clientWidth:document.documentElement.clientWidth,searchText:''};
     static contextTypes ={
       router:PropTypes.object
     }
@@ -26,11 +28,20 @@ class Header extends Component {
         this.setState({clientWidth:document.documentElement.clientWidth});
       }
 
+      onSearchTextChange = (event) => {
+        this.setState({searchText:event.target.value});
+      }
+  
+      onClickSearchButton = () => {
+          this.props.searchItems(this.state.searchText);
+          this.context.router.push(`/search/${this.state.searchText}`);
+      }
+
 
     renderSearchBox(){
      return(
-        <InputField  width="400px" minWidth="100px"   inputContainerClassName='searchBox shadow-sm' element={
-          <Button hasborder={true} clickable={true}
+        <InputField onTextChange={this.onSearchTextChange} input={this.state.searchText}  width="400px" minWidth="100px"  inputContainerClassName='searchBox shadow-sm' element={
+          <Button onClick={this.onClickSearchButton} hasborder={true} clickable={true}
           img={<div className=" align-items-center justify-content-center d-flex shadow-sm" style={{borderRadius: '50%',width:'30px',height:'30px'}}>
            <img width="24px" height="24px" src={searchIcon} /></div>}/>
       } row='flex-row' height='40px'  type="text" placeholder="Search a lost item"  />    
@@ -113,4 +124,9 @@ function mapStateToProps(state){
   return {auth:state.auth}
 }
 
-export default connect(mapStateToProps)(Header);
+function mapDispatchtoProps(dispatch){
+    return bindActionCreators({searchItems},dispatch);
+
+}
+
+export default connect(mapStateToProps,mapDispatchtoProps)(Header);
