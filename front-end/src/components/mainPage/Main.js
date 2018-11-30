@@ -1,5 +1,7 @@
 import React , {Component} from 'react';
 import InputField from '../common/inputField/InputField';
+import Button from '../common/button/Button'
+import searchIcon from '../../assets/Orion_search.png';
 class Main extends Component {
   
 
@@ -20,7 +22,13 @@ class Main extends Component {
                     <h1> lost your shit ? </h1>
                     <h3> you may find it here </h3>
                 </div>
-                <InputField minWidth="300px"  width="800px"  style={styles.searchBoxStyle} inputContainerClassName='shadow-sm' row='flex-row' height='40px' width="50%" type="text" placeholder="Search a lost item"  />    
+                <InputField minWidth="300px"  style={styles.searchBoxStyle} inputContainerClassName='shadow-sm' row='flex-row' height='40px' width="50%" type="text" placeholder="Search a lost item"
+                element={
+                    <Button hasborder={true} clickable={true} /* className='d-flex' style={{border: '1px solid #eee'}} */ 
+                    img={<div className=" align-items-center justify-content-center d-flex shadow-sm" style={{borderRadius: '50%',width:'30px',height:'30px'}}>
+                     <img width="24px" height="24px" src={searchIcon} /></div>}/>
+                }
+                />    
         </div >
         </div>)
     }
