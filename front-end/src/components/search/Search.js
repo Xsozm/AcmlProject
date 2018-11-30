@@ -6,6 +6,9 @@ import {connect} from 'react-redux';
 class Search extends Component{
     state = {items:[]}
     componentWillMount(){
+        if(this.props.searchQuery.items)
+        this.setState({items:this.props.searchQuery.items})
+      console.log(this.props);
       
     }
     render() {
@@ -23,7 +26,7 @@ class Search extends Component{
         return this.state.items.map(
             (item)=>{
                 console.log(item);
-                return (<ItemCard name={item.name} place={item.place}/>)
+                return (<ItemCard key={item.name} name={item.name} place={item.place}/>)
             }
         )
     }
