@@ -1,0 +1,17 @@
+.itemsBox{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    flex-grow:50px;
+    align-items: center;
+    justify-content: center;
+}
+
+@media  only screen and (max-width: 600px){
+    .itemsBox{
+        margin-top: 10%;
+       align-items: center;
+       justify-content: center;
+    }
+
+}
