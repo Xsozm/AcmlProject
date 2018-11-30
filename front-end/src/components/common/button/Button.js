@@ -47,7 +47,7 @@ const Button = ({text,img,borderRadius,color,fontColor,onClick,className,hasbord
         
             style={{... styles.btnStyle,backgroundColor:color,fontColor:fontColor,...style}} className={`${className} d-flex justify-content-center`}>
             
-            {isLoading ? <img style={{width:'24px',height:'24px',fill:'#FFFF'}} src={Loading} /> : 
+            {isLoading ? <img style={{width:'24px',height:'24px',fill:'#FFFF'}} /> : 
             img ?img:
             <font face={'Lato, Calibri, Arial, sans-serif'} size='3' color={fontColor}>{text}</font>}
           </div>
