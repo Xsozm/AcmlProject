@@ -2,8 +2,9 @@ import React from 'react';
 import './search.style.css';
 import ItemCard from './ItemCard';
 import {Component} from 'react';
+import {connect} from 'react-redux';
 class Search extends Component{
-    state = {items:[{name:'1',place:'1'},{name:'2',place:'2'},{name:'3',place:'3'},{name:'4',place:'4'}]}
+    state = {items:[]}
     componentWillMount(){
       
     }
@@ -28,6 +29,10 @@ class Search extends Component{
     }
 }
 
+function mapStateToProps(state){
+    return {searchQuery:state.searchQuery}
+}
+
     
 
-export default Search;
+export default connect(mapStateToProps)(Search);

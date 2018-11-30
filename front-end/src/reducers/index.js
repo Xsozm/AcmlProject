@@ -1,7 +1,8 @@
 import {combineReducers} from 'redux';
+import itemsReducer from './items';
 
 const rootReducer = combineReducers(
-    {test:''}
+    {test:'',searchQuery:itemsReducer}
 )
 
 export default rootReducer;
