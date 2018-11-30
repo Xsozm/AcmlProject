@@ -7,7 +7,7 @@ import Search from '../src/components/search/Search';
 const routes = 
 <Route path="/" component={App}>
     <IndexRoute  component={Main} />
-    <Route path="/search" component={Search} />
+    <Route path="/search/:query" component={Search} />
 
 </Route>
 
