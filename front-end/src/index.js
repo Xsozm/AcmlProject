@@ -1,19 +1,21 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
 import * as serviceWorker from './serviceWorker';
 import {Provider} from 'react-redux';
 import {applyMiddleware,createStore} from 'redux';
 import reduxThunk from 'redux-thunk';
-import reducers from './reducers/index'
+import reducers from './reducers/index';
+import {Router,browserHistory} from 'react-router';
+import routes from './routes'
 
 const storeWithMiddleWare = applyMiddleware(reduxThunk)(createStore);
 const store = storeWithMiddleWare(reducers);
 
 ReactDOM.render(
 <Provider store={store} >
-    <App />
+   <Router  history={browserHistory} routes={routes} >
+   </Router>
     </Provider >
     
     , document.getElementById('root'));
