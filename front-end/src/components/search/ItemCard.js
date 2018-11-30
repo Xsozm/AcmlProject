@@ -7,8 +7,8 @@ class ItemCard extends Component {
              <div style ={styles.containerStyle} className = "shadow-sm  ">
             
                 <div style={styles.detailsStyle}>
-                    <h6>Name:Laptop Lenevo</h6>
-                    <h6>Last Seen At:B1</h6>
+                    <h6>Name:{this.props.name}</h6>
+                    <h6>Last Seen At:{this.props.place}</h6>
                     
                 </div>
                 <div style={styles.TagContainerStyle} className="d-flex  flex-wrap flex-row"> 
