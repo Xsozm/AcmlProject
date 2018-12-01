@@ -43,7 +43,7 @@ const styles = {
     inputStyle:{
         outline:'none',
         borderStyle:'none',
-        textIndent:'',
+        textIndent:'5px',
         height:'30px',
         paddingLeft:'5px',
         width:'100%'
