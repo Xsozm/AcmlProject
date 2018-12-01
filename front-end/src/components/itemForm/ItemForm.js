@@ -56,7 +56,7 @@ class ItemForm extends Component {
           <div className="d-flex justify-content-center">
               <label className=" shadow-sm" style={styles.radioLabelStyle}>
                 <Field style={styles.radioStyle}
-                  name="type"
+                  name="found"
                   component="input"
                   type="radio"
                   value="lost"
@@ -65,7 +65,7 @@ class ItemForm extends Component {
               </label>
               <label  className="shadow-sm" style={styles.radioLabelStyle}>
                 <Field style={styles.radioStyle}
-                  name="type"
+                  name="found"
                   component="input"
                   type="radio"
                   value="found"
@@ -84,11 +84,11 @@ class ItemForm extends Component {
   }
 
    onSubmit = (data) =>{
-       if(data.type=="found"){
-           data={...data,type:true}
+       if(data.found=="found"){
+           data={...data,found:true}
        }
        else{
-        data={...data,type:false}
+        data={...data,found:false}
        }
        console.log(data);
     this.props.submitItem(data);
