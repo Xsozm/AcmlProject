@@ -6,9 +6,6 @@ class Notifications extends Component{
     state = {notifications:[{userName:'test1',itemName:'test1'},{userName:'test2',itemName:'test2'},{userName:'test3',itemName:'test3'},{userName:'test4',itemName:'test4'}]}
 
     componentWillReceiveProps(nextProps){
-        if(this.props.searchQuery.items)
-        this.setState({items:nextProps.searchQuery.items})
-  
       }
     render() {
         return(
