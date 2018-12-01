@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use App\User;
 use App\Mail\Verification_Token;
 use Validator;
+use Redis;
 class AuthController extends Controller
 {
     /**
@@ -112,6 +113,10 @@ class AuthController extends Controller
             return response()->json("Verification Mail sent to Activate Your Account ",400);
 
         }
+
+        // $redis = \LRedis::connection();
+        // $redis->publish('message','Test1');
+
 
         return $this->respondWithToken($token);
     }
