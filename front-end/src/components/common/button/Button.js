@@ -3,7 +3,7 @@ import Loading from '../../../assets/Rolling-1s-200px.svg'
 //import './Button.style.css'
 
 
-const Button = ({text,img,borderRadius,color,fontColor,onClick,className,hasborder,style,clickable,onClickDownColor,isLoading}) =>{
+const Button = ({text,img,borderRadius,color,fontColor,onClick,className,hasborder,style,clickable,onClickDownColor,isLoading,type}) =>{
   {clickable ? styles.btnStyle={... styles.btnStyle,cursor:'pointer'}:styles.btnStyle={... styles.btnStyle,cursor:' '}}
   let  colorStyle = color ? color : '';
     return(
@@ -13,8 +13,8 @@ const Button = ({text,img,borderRadius,color,fontColor,onClick,className,hasbord
             onTouchStart = {
               (e)=>{
               if(hasborder && clickable){
-                e.currentTarget.className=` d-flex justify-content-center ${className}`;
-                e.currentTarget.style.backgroundColor=onClickDownColor; 
+                e.currentTarget.className=` d-flex justify-content-center`;
+                e.currentTarget.style.backgroundColor="#F8F9F9"; 
               }
                 }   
             }
@@ -29,8 +29,8 @@ const Button = ({text,img,borderRadius,color,fontColor,onClick,className,hasbord
             onMouseDownCapture={
                 (e)=>{
                   if(hasborder&& clickable){
-                  e.currentTarget.className=`d-flex justify-content-center ${className}`;
-                  e.currentTarget.style.backgroundColor=onClickDownColor;
+                  e.currentTarget.className=`d-flex justify-content-center`;
+                  e.currentTarget.style.backgroundColor="#F8F9F9";
                   }
                 }   
             }

@@ -1,1 +1,2 @@
 export const FETCH_SEARCH_ITEMS = 'FETCH_SEARCH_ITEMS';
+export const SUBMIT_ITEM = 'SUBMIT_ITEM';
