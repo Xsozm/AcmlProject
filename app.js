@@ -8,11 +8,11 @@ server.listen(8890,function(){
 });
 io.on('connection',function (socket) {
     console.log("Client Connected");
-//    let client = redis.createClient();
-//    client.subscribe('message');
-//    client.on('message',function (channel,mesage) {
-//        console.log("new event"+channel+" "+mesage);
-//    })
+   let client = redis.createClient();
+   client.subscribe('message');
+   client.on('message',function (channel,message) {
+       console.log("new event"+channel+" "+message);
+   })
 
 //    client.on('disconnect',function () {
 //        console.log("client out");
