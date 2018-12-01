@@ -22,14 +22,32 @@ const renderField = ({
   </div>
 )
 
+const renderTextarea = ({
+    input,
+    label,
+    type,
+    meta: { touched, error, warning }
+  }) =>{
+   return (
+        <div>
+          <div className="d-flex justify-content-center">{label}</div>
+          <div>
+            <textarea style={error&& touched ?{...styles.textAreaStyle,border:'1px solid #dc3545'}:styles.textAreaStyle} {...input}  placeholder={label}  />
+           {error&& touched?<div style={styles.invalidTextStyle}>{error}</div>:null}
+          </div>
+        </div>
+      )
+  } 
+
 
 
 class ItemForm extends Component {
+    state={descriptionText:''}
  
   render(){
     const { handleSubmit, pristine, reset, submitting } = this.props;
     return (
-        <form className="container bg-white"   style={styles.containerStyle} onSubmit={handleSubmit(this.onSubmit)}>
+        <form className=" container bg-white"   style={styles.containerStyle} onSubmit={handleSubmit(this.onSubmit)}>
              <style>{'body { background-color: #F8F9F9}'}</style>
           <Field
             name="name"
@@ -45,11 +63,10 @@ class ItemForm extends Component {
             label="place"
             validate={required}
           />
-            <div className="d-flex justify-content-center">description</div>
-          <Field style={styles.textAreaStyle}
+          <Field 
             name="description"
             type="textarea"
-            component="textarea"
+            component={renderTextarea}
             label="description"
             validate={required}
           />
@@ -84,7 +101,7 @@ class ItemForm extends Component {
   }
 
    onSubmit = (data) =>{
-       if(data.found=="found"){
+       if(data.found==="found"){
            data={...data,found:true}
        }
        else{
@@ -113,7 +130,7 @@ const styles={
     },
     textAreaStyle:{
         width:"100%",
-        borderRadius:'50px' ,
+        borderRadius:'10px' ,
         overflow:'hidden',
         border: '1px solid #ddd',
         outline: 'none',
@@ -126,6 +143,10 @@ const styles={
     },
     radioStyle:{
        // visibility:'hidden'
+    },
+    invalidTextStyle:{
+        fontSize: '80%',
+        color: '#dc3545'
     }
 }
 
