@@ -1,8 +1,9 @@
 import React from 'react';
 import {Component} from 'react';
-import './notifications.style.css'
+import './notifications.style.css';
+import NotificationsCard from './NotificationCard';
 class Notifications extends Component{
-    state = {items:[]}
+    state = {notifications:[{userName:'test1',itemName:'test1'},{userName:'test2',itemName:'test2'},{userName:'test3',itemName:'test3'},{userName:'test4',itemName:'test4'}]}
 
     componentWillReceiveProps(nextProps){
         if(this.props.searchQuery.items)
@@ -13,22 +14,22 @@ class Notifications extends Component{
         return(
             <div>
                  <style>{'body { background-color: #F8F9F9}'}</style>
-            <div className="itemsBox">
-            {/*this.renderItems()*/}
+            <div className="containerStyle container">
+            {this.renderItems()}
             </div>
             </div>
         );
     }
-    /* 
+    
      renderItems = () =>{
-        return this.state.items.map(
-            (item)=>{
-                console.log(item);
-                return (<ItemCard key={item.name} name={item.name} place={item.place}/>)
+        return this.state.notifications.map(
+            (notification)=>{
+                console.log(notification);
+                return (<NotificationsCard key={notification.userName} userName={notification.userName} itemName={notification.itemName}/>)
             }
         )
     }
-    */
+    
    
 }
 
