@@ -1,4 +1,4 @@
-import {FETCH_SEARCH_ITEMS,FETCH_NOTIFICATIONS,FETCH_NOTIFICATION} from './types';
+import {FETCH_SEARCH_ITEMS,FETCH_NOTIFICATIONS,ADD_NEW_NOTIFICATION} from './types';
 
 
 export function searchItems(query){
@@ -21,8 +21,8 @@ export function fetchNotifications(){
               }
 }
 
-export function fetchNewNotification(){
+export function fetchNewNotification(notification){
     return (dispatch) =>{
-        dispatch({type:FETCH_NOTIFICATION,payload:{userName:'5',itemName:'5'}})
+        dispatch({type:ADD_NEW_NOTIFICATION,payload:notification})
     }
 }

@@ -4,9 +4,17 @@ import './notifications.style.css';
 import NotificationsCard from './NotificationCard';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
+import socketIOClient from "socket.io-client";
 import {fetchNewNotification,fetchNotifications} from '../../actions/index';
-class Notifications extends Component{
+const SOCKET_URL='';
 
+class Notifications extends Component{
+    componentDidMount(){
+       // const socket = socketIOClient(SOCKET_URL);
+       // socket.on("FromAPI", data => {
+          //  fetchNewNotification(data);
+      //  } );
+    }
     componentWillMount(){
         this.props.fetchNotifications();
        
