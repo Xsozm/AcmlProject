@@ -1,4 +1,4 @@
-import React , {Component} from 'react';
+/*import React , {Component} from 'react';
 import InputField from '../InputField';
 import Button from '../common/button/Button';
 import {LogInUser} from '../../actions/index'
@@ -110,3 +110,4 @@ function mapStateToProps(state){
 
 
 export default connect(mapStateToProps,{LogInUser})(LogIn);
+*/

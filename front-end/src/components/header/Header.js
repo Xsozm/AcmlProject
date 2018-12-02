@@ -56,6 +56,10 @@ class Header extends Component {
       this.context.router.push('/signup');
     }
 
+    redirectNotifications = () =>{
+      this.context.router.push('/notifications');
+    }
+
   render() {
      const {router:{location:{pathname}}}=this.context;
     return (
@@ -69,6 +73,7 @@ class Header extends Component {
            <div  style={styles.buttonsBoxContainer}  className='buttonsBoxContainer d-flex flex-row-reverse col-sm'>
             <Button onClick={this.redirectLogin}  clickable={true} hasborder={true} style={styles.buttonsStyle} className='' text='LOGIN'/>
             <Button onClick={this.redirectSignup} clickable={true} hasborder={true} style={styles.buttonsStyle} className=''  text='SIGNUP'/>
+            <Button onClick={this.redirectNotifications} clickable={true} hasborder={true} style={styles.buttonsStyle} className=''  text='NOTIFICATIONS'/>
           </div> :
            <div  className='buttonsBoxContainer d-flex flex-row-reverse col-sm'>
           <Button onClick={this.logout} clickable={true} hasborder={true} style={styles.buttonsStyle} className='' text='LOGOUT'/></div> }  
@@ -78,6 +83,7 @@ class Header extends Component {
           <div style={styles.buttonsBoxContainer} className='d-flex flex-row-reverse col-sm'>
             <Button onClick={this.redirectLogin}  clickable={true} hasborder={true} style={styles.buttonsStyle} className='' text='LOGIN'/>
             <Button onClick={this.redirectSignup} clickable={true} hasborder={true} style={styles.buttonsStyle} className=''  text='SIGNUP'/>
+            <Button onClick={this.redirectNotifications} clickable={true} hasborder={true} style={styles.buttonsStyle} className=''  text='NOTIFICATIONS'/>
           </div>:
            <div style={styles.buttonsBoxContainer} className='d-flex flex-row-reverse col-sm'>
           <Button onClick={this.logout} clickable={true} hasborder={true} style={styles.buttonsStyle} className='' text='LOGOUT'/></div> }  
