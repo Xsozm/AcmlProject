@@ -1,4 +1,4 @@
-import {FETCH_SEARCH_ITEMS} from './types';
+import {FETCH_SEARCH_ITEMS,FETCH_NOTIFICATIONS,FETCH_NOTIFICATION} from './types';
 
 
 export function searchItems(query){
@@ -13,4 +13,16 @@ export function submitItem(item){
         console.log(item);
     }
   
+}
+
+export function fetchNotifications(){
+    return (dispatch) =>{
+                  dispatch({type:FETCH_NOTIFICATIONS,payload:[{userName:'1',itemName:'1'},{userName:'2',itemName:'2'},{userName:'3',itemName:'3'},{userName:'4',itemName:'4'}]});
+              }
+}
+
+export function fetchNewNotification(){
+    return (dispatch) =>{
+        dispatch({type:FETCH_NOTIFICATION,payload:{userName:'5',itemName:'5'}})
+    }
 }
