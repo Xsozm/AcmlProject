@@ -1,5 +1,7 @@
+
 import {FETCH_SEARCH_ITEMS,FETCH_NOTIFICATIONS,
     ADD_NEW_NOTIFICATION,REG_ERR,REG_SUCC,AUTH_EMAIL_ERR,AUTH_OTHER_ERR,AUTH_PASSWORD_ERR,LOADING_REQ,FINISHING_REQ,AUTH_USER} from './types';
+
 import axios from 'axios';
 import {browserHistory} from 'react-router';
 const BASE_URL = 'http://172.20.10.4:8000/api';

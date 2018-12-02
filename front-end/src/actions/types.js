@@ -13,3 +13,4 @@ export const REGISTER_TYPE = 'REGISTER';
 export const LOADING_REQ = 'LOADING_REQ';
 export const FINISHING_REQ = 'FINISHING_REQ';
 export const AUTH_OTHER_ERR = 'AUTH_OTHER_ERR';
+
