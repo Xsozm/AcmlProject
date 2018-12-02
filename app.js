@@ -12,8 +12,8 @@ io.on('connection',function (socket) {
    client.subscribe('message');
    client.on('message',function (channel,message) {
      message=JSON.parse(message);
-     console.log(message.notifier_id);
-      let channel2='user'+message.notifier_id;
+     console.log(message);
+      let channel2='user'+message.notified_id;
      console.log(channel2);
        socket.emit(channel2,message);
    })

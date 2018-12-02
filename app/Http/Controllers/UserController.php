@@ -5,8 +5,9 @@ namespace App\Http\Controllers;
 use App\Mail\Verification_Token;
 use Illuminate\Foundation\Auth\User;
 use Illuminate\Http\Request;
-use Mail;
-
+use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\Controller;
+use App\Notification;
 class UserController extends Controller
 {
 
@@ -31,6 +32,14 @@ class UserController extends Controller
         return response()->json("User Banned Successfully",200);
 
 
+    }
+
+    public function shownotification(Request $request){
+
+        $user = auth()->user();
+        $ans =  Notification::where('notified_id',$user->id)->select('NotifierName','ItemName')->get();
+
+        return response()->json($ans);
     }
 
     public function unban($user_id){

@@ -17,6 +17,10 @@ class CreateRequestsTable extends Migration
             $table->increments('id');
             $table->integer('notifier_id')->unsigned()->index();
             $table->integer('item_id')->unsigned()->index();
+            $table->integer('notified_id')->unsigned()->index();
+            $table->string('ItemName');
+            $table->string('NotifierName');
+            $table->foreign('notified_id')->references('id')->on('users')->onDelete('cascade');;
             $table->foreign('notifier_id')->references('id')->on('users')->onDelete('cascade');;
             $table->foreign('item_id')->references('id')->on('items')->onDelete('cascade');;
             $table->timestamps();

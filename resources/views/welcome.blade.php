@@ -68,8 +68,8 @@
 
             //listening to the event on the node server
             var socket = io.connect('ws://127.0.0.1:8890',{transports:['websocket']});
-            socket.on("user2",function(data){
-              console.log(data);
+            socket.on("user1",function(data){
+              console.log('Notification '+data);
             });
         </script>
     </head>

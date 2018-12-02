@@ -40,6 +40,7 @@ Route::group(['prefix'=>'items'],function (){
 
     Route::apiresource('/{item}/tags','TagController'); // logged in tags for specific item
     Route::apiresource('/{item}/images','ImageController'); // images for specific item
+    Route::post('/{item}/request','RequestController@make_request');
 
     Route::put('/{item}/tags','TagController@update_tags_for_specific_item');
     Route::get('/search/{string}','ItemController@search');
@@ -52,5 +53,6 @@ Route::group(['prefix'=>'items'],function (){
 
 
 });
+Route::post('/notifications','UserController@shownotification');
 
 Route::post('/send','AuthController@send');
