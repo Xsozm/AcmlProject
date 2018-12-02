@@ -7,6 +7,7 @@ import ItemForm from '../src/components/itemForm/ItemForm';
 import LogIn from '../src/components/login/Login';
 import Notifications from '../src/components/notifications/Notifications';
 import rquireAuth from '../src/components/requireAuth/RequireAuth';
+import RegisterComp from '../src/components/register/Register';
 
 const routes = 
 <Route path="/" component={App}>
@@ -15,6 +16,7 @@ const routes =
     <Route path="/item/submit" component={ItemForm} />
     <Route path="/notifications" component={Notifications} />
     <Route path="/login" component={LogIn} />
+    <Route path="/signup" component={RegisterComp} />
 
 </Route>
 
