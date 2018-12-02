@@ -1,10 +1,11 @@
 import React , {Component} from 'react';
 import InputField from '../common/inputField/InputField';
 import Button from '../common/button/Button';
-//import {Register} from '../../actions/index'
+import {Register} from '../../actions/index'
 import {connect} from 'react-redux';
 import ProbTypes from 'prop-types';
-import './register.style.css'
+import './register.style.css';
+import axios from 'axios';
 
 class RegisterComp extends Component{
     state={username:'',password:'',email:'',mobile:'',
@@ -48,51 +49,8 @@ class RegisterComp extends Component{
 
     onClickHandle = () =>{
      // console.log(this.props.LogInUser({email:this.state.username,password:this.state.password}));  
-      const promise = this.props.Register({username:this.state.username,password:this.state.password,email:this.state.email,mob:this.state.mobile}).payload;
-      this.setState({loading:true,submitisClickable:false});
-      promise.then( 
-          (e)=>{
-              console.log(e.data);
-           this.setState({otherErrorsMsg:e.data,otherErrors:true});
-            }
-    
-    ).catch(
-            (e)=>{
-                console.log(e.response);
-                /* if(e.response.data.errors){
-                    this.setState({otherErrors:false});
-                    if (e.response.data.errors.email) {
-                        this.setState({emailError:true,emailErrorMsg:e.response.data.errors.email[0]})
-                       }
-                        if (e.response.data.errors.password) {
-                         this.setState({passwordError:true,passwordErrorMsg:e.response.data.errors.password[0]})
-                       }
-                        if(e.response.data.errors.username){
-                        this.setState({usernameError:true,usernameErrorMsg:e.response.data.errors.username[0]})
-                       }
-                        if(e.response.data.errors.mob){
-                        this.setState({mobileError:true,mobileErrorMsg:e.response.data.errors.mob[0]})
-                       }
-                   }
-                   else{
-                    console.log(e.response);
-                    this.setState({emailError:false,passwordError:false,usernameError:false,mobileError:false});
-                    if(e.response.data.error){
-                      this.setState({emailError:false,passwordError:false,otherErrors:true,otherErrorsMsg:e.response.data.error});
-                    }
-                    else{
-                      this.setState({emailError:false,passwordError:false,otherErrors:true,otherErrorsMsg:e.response.data});
-                    }
-                
-                }
-            } */
-            } 
-        )
-    .then(
-        ()=>{
-            this.setState({loading:false,submitisClickable:true});
-        }
-        ) 
+       this.props.Register({username:this.state.username,password:this.state.password,email:this.state.email,mob:this.state.mobile});
+      
     }
     
 
@@ -159,4 +117,4 @@ const style={
 
 
 
-export default connect(null)(RegisterComp);
+export default connect(null,{Register})(RegisterComp);
