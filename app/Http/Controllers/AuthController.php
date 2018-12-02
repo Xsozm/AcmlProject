@@ -44,7 +44,7 @@ class AuthController extends Controller
            'mob' => 'bail|required|digits:11',
            'whatsapp' => 'digit:11'
         ];
-
+//
         $validator = Validator::make($request->all(), $rules);
         if ($validator->fails()){
             return response()->json(array(
