@@ -42,14 +42,16 @@ class RegisterComp extends Component{
                  { this.state.otherErrors  ?  <span className="align-self-center" style={errorStyle}>{this.state.otherErrorsMsg}</span>:null}
                 <div style={submitBtnStyle}>
              {   <Button isLoading={this.state.loading} className="shadow-sm" onClick={this.onClickHandle}  hasborder={true} onClickDownColor='#0b51c1' clickable={this.state.submitisClickable}  color='#4286f4' fontColor='#FFFFF'   className=" d-flex d-flex align-self-start " text='SIGNUP'/>  }
+             <div>{this.props.reg.regError || this.props.reg.regSucc }</div>
                </div>
+              
             </form>
         )
     }
 
     onClickHandle = () =>{
      // console.log(this.props.LogInUser({email:this.state.username,password:this.state.password}));  
-       this.props.Register({username:this.state.username,password:this.state.password,email:this.state.email,mob:this.state.mobile});
+     const promise= this.props.Register({username:this.state.username,password:this.state.password,email:this.state.email,mob:this.state.mobile});
       
     }
     
@@ -114,7 +116,9 @@ const style={
 }
 
 
+function mapStateToProps(state){
+  return {reg:state.auth}
+}
 
 
-
-export default connect(null,{Register})(RegisterComp);
+export default connect(mapStateToProps,{Register})(RegisterComp);

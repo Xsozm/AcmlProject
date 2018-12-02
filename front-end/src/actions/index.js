@@ -1,4 +1,4 @@
-import {FETCH_SEARCH_ITEMS,FETCH_NOTIFICATIONS,ADD_NEW_NOTIFICATION} from './types';
+import {FETCH_SEARCH_ITEMS,FETCH_NOTIFICATIONS,ADD_NEW_NOTIFICATION,REG_ERR,REG_SUCC} from './types';
 import axios from 'axios';
 const BASE_URL = 'http://172.20.10.4:8000/api';
 
@@ -39,39 +39,19 @@ export function Register(data){
         req.then( 
             (res)=>{
                 console.log(res);
-               // dispatch({type:'REG_COMPELE',payload:res.data});
+                dispatch({type:REG_SUCC});
               }
       
       ).catch(
               (e)=>{
-                console.log(e);
-                  //if(e.response.data.errors){
-                    
-                    //dispatch({type:'REG_FAILED',payload:res.data});
-                    /*
-                      if (e.response.data.errors.email) {
-                          this.setState({type:REG_EMAIL_ERR,emailErrorMsg:e.response.data.errors.email[0]})
-                         }
-                          if (e.response.data.errors.password) {
-                           this.setState({type:REG_EMAIL_ERR,passwordErrorMsg:e.response.data.errors.password[0]})
-                         }
-                          if(e.response.data.errors.username){
-                          this.setState({utype:REG_USERNAME_ERR,usernameErrorMsg:e.response.data.errors.username[0]})
-                         }
-                          if(e.response.data.errors.mob){
-                          this.setState({type:REG_MOBILE_ERR,mobileErrorMsg:e.response.data.errors.mob[0]})
-                         }
-                        */
-                    // }
+               
+                  if(e.response.data.errors){
+                    dispatch({type:REG_ERR});
+                     }
                      
               }
           )
-      .then(
-          ()=>{
-
-              //this.setState({loading:false,submitisClickable:true});
-          }
-          ) 
+      
         }
   
 }
