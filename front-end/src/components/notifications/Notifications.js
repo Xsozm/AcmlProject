@@ -23,7 +23,7 @@ class Notifications extends Component{
         return(
             <div>
                  <style>{'body { background-color: #F8F9F9}'}</style>
-            <div onClick={()=>{this.props.fetchNewNotification();console.log(this.props);}} className="containerStyle container">
+            <div className="containerStyle container">
             {this.renderItems()}
             </div>
             </div>
