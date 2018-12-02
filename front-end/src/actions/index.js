@@ -1,6 +1,11 @@
-import {FETCH_SEARCH_ITEMS,FETCH_NOTIFICATIONS,ADD_NEW_NOTIFICATION,REG_ERR,REG_SUCC} from './types';
+
+import {FETCH_SEARCH_ITEMS,FETCH_NOTIFICATIONS,
+    ADD_NEW_NOTIFICATION,REG_ERR,REG_SUCC,AUTH_EMAIL_ERR,AUTH_OTHER_ERR,AUTH_PASSWORD_ERR,LOADING_REQ,FINISHING_REQ,AUTH_USER} from './types';
+
 import axios from 'axios';
+import {browserHistory} from 'react-router';
 const BASE_URL = 'http://172.20.10.4:8000/api';
+
 
 export function searchItems(query){
     return (dispatch) =>{
@@ -54,4 +59,40 @@ export function Register(data){
       
         }
   
+}
+
+export function LogInUser(data){
+    const URL = BASE_URL+'/auth/login';
+    const req = axios.post(URL,data);
+    return (dispatch) =>{
+        dispatch({type:LOADING_REQ})
+        req.then(
+            (res)=>{
+                localStorage.setItem('token', res.data.access_token);
+                browserHistory.push('/');
+                 dispatch({type:AUTH_USER});
+
+            }
+        ).catch((res)=>{
+           let  errors = res.response.data.errors;
+           if(errors){
+                console.log(res.response.data);
+                if(errors.email){
+                    dispatch({type:AUTH_OTHER_ERR,payload:''})
+                    dispatch({type:AUTH_EMAIL_ERR,payload:errors.email})
+                }
+                if(errors.password){
+                    dispatch({type:AUTH_OTHER_ERR,payload:''})
+                    dispatch({type:AUTH_PASSWORD_ERR,payload:errors.password})
+                }
+           }
+            else{
+                dispatch({type:AUTH_PASSWORD_ERR,payload:''})
+                dispatch({type:AUTH_EMAIL_ERR,payload:''})
+                dispatch({type:AUTH_OTHER_ERR,payload:res.response.data.error})
+            }
+        }).then(()=>{
+            dispatch({type:FINISHING_REQ})
+        })
+    }
 }

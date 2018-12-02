@@ -1,6 +1,7 @@
 import React , {Component} from 'react';
 import InputField from '../common/inputField/InputField';
 import Button from '../common/button/Button';
+import {LogInUser} from '../../actions/index'
 import {connect} from 'react-redux';
 import _ from 'lodash';
 import ProbTypes from 'prop-types';
@@ -43,7 +44,7 @@ class LogIn extends Component{
     }
 
     onClickHandle = () =>{
-      // this.props.LogInUser({email:this.state.email,password:this.state.password});
+       this.props.LogInUser({email:this.state.email,password:this.state.password});
     }
     
 
@@ -108,4 +109,4 @@ function mapStateToProps(state){
 }
 
 
-export default connect(mapStateToProps,{LogIn})(LogIn);
+export default connect(mapStateToProps,{LogInUser})(LogIn);

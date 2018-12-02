@@ -69,24 +69,28 @@ class Header extends Component {
       {this.state.clientWidth <=600 ?<Button onClick={this.openSideBar} img={<div className=" align-items-center justify-content-center d-flex shadow-sm" style={{borderRadius: '50%',width:'30px',height:'30px'}}>
            <img width="24px" height="24px" src={sideBarArrow} /></div>}  clickable={true} hasborder={true} style={styles.buttonsStyle} className={this.state.sideBarOpen?'sidebarButtonDown':'sidebarButtonUp'} text='LOGIN'/>:null}
         {pathname=="/" ? '' : this.renderSearchBox()}  
-          {true? 
+          {!this.props.auth.authnticated? 
            <div  style={styles.buttonsBoxContainer}  className='buttonsBoxContainer d-flex flex-row-reverse col-sm'>
             <Button onClick={this.redirectLogin}  clickable={true} hasborder={true} style={styles.buttonsStyle} className='' text='LOGIN'/>
             <Button onClick={this.redirectSignup} clickable={true} hasborder={true} style={styles.buttonsStyle} className=''  text='SIGNUP'/>
-            <Button onClick={this.redirectNotifications} clickable={true} hasborder={true} style={styles.buttonsStyle} className=''  text='NOTIFICATIONS'/>
+           
           </div> :
            <div  className='buttonsBoxContainer d-flex flex-row-reverse col-sm'>
-          <Button onClick={this.logout} clickable={true} hasborder={true} style={styles.buttonsStyle} className='' text='LOGOUT'/></div> }  
+          <Button onClick={this.logout} clickable={true} hasborder={true} style={styles.buttonsStyle} className='' text='LOGOUT'/>
+          <Button onClick={this.redirectNotifications} clickable={true} hasborder={true} style={styles.buttonsStyle} className=''  text='NOTIFICATIONS'/>
+          </div> }  
     </nav>
    {this.state.clientWidth <=600 ? <div  className={`${this.state.sideBarOpen?'headerMobile':'headerMobileHidden'} align-items-center d-flex flex-row`}>
-          {true?
+          {!this.props.auth.authnticated?
           <div style={styles.buttonsBoxContainer} className='d-flex flex-row-reverse col-sm'>
             <Button onClick={this.redirectLogin}  clickable={true} hasborder={true} style={styles.buttonsStyle} className='' text='LOGIN'/>
             <Button onClick={this.redirectSignup} clickable={true} hasborder={true} style={styles.buttonsStyle} className=''  text='SIGNUP'/>
-            <Button onClick={this.redirectNotifications} clickable={true} hasborder={true} style={styles.buttonsStyle} className=''  text='NOTIFICATIONS'/>
           </div>:
            <div style={styles.buttonsBoxContainer} className='d-flex flex-row-reverse col-sm'>
-          <Button onClick={this.logout} clickable={true} hasborder={true} style={styles.buttonsStyle} className='' text='LOGOUT'/></div> }  
+          <Button onClick={this.logout} clickable={true} hasborder={true} style={styles.buttonsStyle} className='' text='LOGOUT'/>
+          <Button onClick={this.redirectNotifications} clickable={true} hasborder={true} style={styles.buttonsStyle} className=''  text='NOTIFICATIONS'/>
+          
+          </div> }  
     </div>:null}
     </div>
     );
