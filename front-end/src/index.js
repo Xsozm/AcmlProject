@@ -12,6 +12,10 @@ import routes from './routes'
 const storeWithMiddleWare = applyMiddleware(reduxThunk)(createStore);
 const store = storeWithMiddleWare(reducers);
 
+if(localStorage.getItem('token')){
+    store.dispatch({type:AUTH_USER})
+}
+
 ReactDOM.render(
 <Provider store={store} >
    <Router  history={browserHistory} routes={routes} >
