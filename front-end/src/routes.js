@@ -5,7 +5,8 @@ import Main from './components/mainPage/Main';
 import Search from '../src/components/search/Search';
 import ItemForm from '../src/components/itemForm/ItemForm';
 //import LogIn from '../src/components/login/Login';
-import Notifications from '../src/components/notifications/Notifications'
+import Notifications from '../src/components/notifications/Notifications';
+import rquireAuth from '../src/components/requireAuth/RequireAuth';
 
 const routes = 
 <Route path="/" component={App}>
