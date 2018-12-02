@@ -20,7 +20,7 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/test',function(){
   $redis = Redis::connection();
-  $redis->publish('message','Test1');
+  $redis->publish('message',json_encode(['notified_id'=>1 ,'notifier_id' =>2 ,'state'=>1]));
   return 'published';
 
 });

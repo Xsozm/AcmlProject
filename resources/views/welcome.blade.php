@@ -62,6 +62,16 @@
                 margin-bottom: 30px;
             }
         </style>
+
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js"></script>
+        <script type="text/javascript">
+
+            //listening to the event on the node server
+            var socket = io.connect('ws://127.0.0.1:8890',{transports:['websocket']});
+            socket.on("user2",function(data){
+              console.log(data);
+            });
+        </script>
     </head>
     <body>
         <div class="flex-center position-ref full-height">
@@ -84,14 +94,7 @@
                     Laravel
                 </div>
 
-                <div class="links">
-                    <a href="https://laravel.com/docs">Documentation</a>
-                    <a href="https://laracasts.com">Laracasts</a>
-                    <a href="https://laravel-news.com">News</a>
-                    <a href="https://nova.laravel.com">Nova</a>
-                    <a href="https://forge.laravel.com">Forge</a>
-                    <a href="https://github.com/laravel/laravel">GitHub</a>
-                </div>
+
             </div>
         </div>
     </body>
