@@ -1,5 +1,6 @@
-import {FETCH_SEARCH_ITEMS,FETCH_NOTIFICATIONS,ADD_NEW_NOTIFICATION} from './types';
-
+import {FETCH_SEARCH_ITEMS,FETCH_NOTIFICATIONS,ADD_NEW_NOTIFICATION,REG_ERR,REG_SUCC} from './types';
+import axios from 'axios';
+const BASE_URL = 'http://172.20.10.4:8000/api';
 
 export function searchItems(query){
     return (dispatch) =>{
@@ -25,4 +26,32 @@ export function fetchNewNotification(notification){
     return (dispatch) =>{
         dispatch({type:ADD_NEW_NOTIFICATION,payload:notification})
     }
+}
+
+
+export function Register(data){
+    const URL = BASE_URL+'/auth/register';
+    const req = axios.post(URL,data);
+    console.log(data);
+
+    return (dispatch) =>{
+       // dispatch({type:LOADING_REQ})
+        req.then( 
+            (res)=>{
+                console.log(res);
+                dispatch({type:REG_SUCC});
+              }
+      
+      ).catch(
+              (e)=>{
+               
+                  if(e.response.data.errors){
+                    dispatch({type:REG_ERR});
+                     }
+                     
+              }
+          )
+      
+        }
+  
 }
