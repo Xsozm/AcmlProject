@@ -6,19 +6,19 @@ import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import socketIOClient from "socket.io-client";
 import {fetchNewNotification,fetchNotifications} from '../../actions/index';
-const SOCKET_URL='';
+const SOCKET_URL='127.0.0.1:8890/';
+const user = JSON.parse(localStorage.getItem("user"));
+const socket = socketIOClient(SOCKET_URL);
 
 class Notifications extends Component{
     componentDidMount(){
-       // const socket = socketIOClient(SOCKET_URL);
-       // socket.on("FromAPI", data => {
-          //  fetchNewNotification(data);
-      //  } );
+   
+        socket.on(`user${user.id}`, data => {
+            console.log(data);
+            fetchNewNotification({NotifierName:data.NotifierName,ItemName:data.ItemName});
+            this.props.fetchNotifications();
+        } );
     }
-    componentWillMount(){
-        this.props.fetchNotifications();
-       
-      }
     render() {
         return(
             <div>
@@ -33,8 +33,7 @@ class Notifications extends Component{
      renderItems = () =>{
         return this.props.notifications.map(
             (notification)=>{
-                console.log(notification);
-                return (<NotificationsCard  key={notification.userName} userName={notification.userName} itemName={notification.itemName}/>)
+                return (<NotificationsCard  key={notification.NotifierName} userName={notification.NotifierName} itemName={notification.ItemName}/>)
             }
         )
     }

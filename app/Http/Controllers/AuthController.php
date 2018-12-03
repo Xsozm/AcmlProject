@@ -24,6 +24,7 @@ class AuthController extends Controller
     }
 
     public function activate($token){
+
         $ver = Verify_Token::where('token','=',$token)->first();
         if(!isset($ver)){
             return response()->json("Token Not Valid",401);
@@ -116,9 +117,9 @@ class AuthController extends Controller
 
         // $redis = \LRedis::connection();
         // $redis->publish('message','Test1');
+        return response()->json(['token' => $this->respondWithToken($token),'user'=>$user]);
 
 
-        return $this->respondWithToken($token);
     }
 
 

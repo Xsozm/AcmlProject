@@ -17,6 +17,7 @@ class RequestController extends Controller
     }
 
     public function make_request(Request $request,$item_id){
+
         $user = auth()->user();
         $item = Item::where('id',$item_id)->first();
         $NotifierName = $user->username;

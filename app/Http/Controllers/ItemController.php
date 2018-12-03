@@ -6,6 +6,8 @@ use Validator;
 use App\Item;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\Notification;
+use Illuminate\Support\Facades\Redis ;
 
 
 class ItemController extends Controller
@@ -13,8 +15,8 @@ class ItemController extends Controller
 
     public function __construct()
     {
-        $this->middleware('auth:api');
-        $this->middleware('verified');
+        $this->middleware('auth:api',['except' => ['search']]);
+        $this->middleware('verified',['except'=>['search']]);
     }
 
     /**
@@ -74,6 +76,7 @@ class ItemController extends Controller
         $item->place=$request->input('place');
         $item->found=$request->input('found');
         $item->description=$request->input('description');
+        $item->confirmed=true ; // we will remove later
         $item->user_id=$user->id;
         $item->save();
         return response()->json(array('message'=>'Created Successfully','item'=>$item),200);
@@ -232,6 +235,7 @@ class ItemController extends Controller
     function in2($item,$string){
 
         $tags = $item->tags;
+        if(isset($tags))
         foreach ($tags as $tag){
             if(strpos($tag->name, $string)!==false)
                 return true;
@@ -239,16 +243,43 @@ class ItemController extends Controller
         return false;
 
     }
+    public function make_request(Request $request){
+        $item_id = $request->item_id;
+
+        $user = auth()->user();
+        $item = Item::where('id',$item_id)->first();
+        $NotifierName = $user->username;
+        $ItemName = $item->name ;
+        $notifier_id = $user->id;
+        $notified_id = $item->owner->id;
+
+        $notification = new Notification();
+        $notification->notifier_id=$notifier_id;
+        $notification->notified_id=$notified_id;
+        $notification->item_id=$item->id;
+        $notification->ItemName=$ItemName;
+        $notification->NotifierName=$NotifierName;
+        $notification->save();
+        $redis = Redis::connection();
+        $redis->publish('message',json_encode(['notified_id'=>$notification->notified_id ,'NotifierName' =>$notification->NotifierName ,'ItemName'=>$notification->ItemName]));
+
+
+        return response()->json("Item Requested Successfully",200);
+
+
+
+    }
 
     public function search($string){
-        $items= Db::table('items')->where('confirmed','=',true)->get();
+
+        $items= DB::table('items')->where('confirmed','=',true)->get();
         $ans = collect();
         foreach ($items as $item){
-            if($this->in($item,$string) || $this->in2($item,$string))
+            if($this->in($item,$string) )
                 $ans->push($item);
 
         }
-        return $ans;
+        return response()->json($ans,200);
     }
 
     function searchbytag($string){

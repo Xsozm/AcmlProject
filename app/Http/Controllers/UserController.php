@@ -39,7 +39,7 @@ class UserController extends Controller
         $user = auth()->user();
         $ans =  Notification::where('notified_id',$user->id)->select('NotifierName','ItemName')->get();
 
-        return response()->json($ans);
+        return response()->json($ans,200);
     }
 
     public function unban($user_id){

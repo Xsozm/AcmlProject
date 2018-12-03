@@ -23,6 +23,7 @@ Route::group([
 
 
 });
+Route::post('hazem/request','ItemController@make_request');
 
 Route::post('tags/create_new_tag','TagController@create_new_tag');
 Route::get('tags/show_all_tags','TagController@show_all_tags');
@@ -40,7 +41,6 @@ Route::group(['prefix'=>'items'],function (){
 
     Route::apiresource('/{item}/tags','TagController'); // logged in tags for specific item
     Route::apiresource('/{item}/images','ImageController'); // images for specific item
-    Route::post('/{item}/request','RequestController@make_request');
 
     Route::put('/{item}/tags','TagController@update_tags_for_specific_item');
     Route::get('/search/{string}','ItemController@search');
