@@ -1,0 +1,80 @@
+
+
+.header{
+    /* border: 1px solid #eee; */
+     background-color:#FFFF; 
+    padding-top:0.5%;
+    padding-bottom:0.5%;
+    z-index:5;
+}
+
+.searchBox{
+      border-radius: 50px;
+      overflow:hidden
+
+}
+
+.buttonsBoxContainer{
+    margin-right:1%,
+}
+
+.sidebarButton{
+    visibility: hidden !important;
+    display: none !important;
+}
+
+
+
+
+
+
+@media  only screen and (max-width: 600px){
+    .buttonsBoxContainer{
+        visibility: hidden !important;
+        display: none !important;
+        width:0% !important;
+        padding:none;
+    }
+    .searchBox{
+        border: none;
+        margin-left:0;
+        width:100% !important;
+        margin-top:2%;
+    }
+    .sidebarButton{
+        visibility: visible !important;
+        display: flex !important;
+    }
+    .headerMobile{
+        opacity:1;
+        transition : opacity 0.5s ease;
+      
+    }
+    .headerMobileHidden{
+        display: none;
+        visibility: hidden !important;
+    }
+    
+    
+    
+    .sidebarButtonDown{
+        transform:rotate(90deg);
+        -ms-transform:rotate(90deg);
+        -webkit-transform:rotate(90deg);
+        transition: transform 0.5s ease;
+    }
+
+    .sidebarButtonUp{
+        transform:rotate(-90deg);
+        -ms-transform:rotate(-90deg);
+        -webkit-transform:rotate(-90deg);
+        transition: transform 0.5s ease;
+    }
+
+    .headerContainer{
+        position: fixed;
+        width:100%;
+        top:0;
+        z-index:5;
+    }
+}

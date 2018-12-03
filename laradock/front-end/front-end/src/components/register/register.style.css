@@ -1,0 +1,39 @@
+.containerStyle{
+    padding: 2% ;
+    box-Shadow: 0 2px 2px 0 rgba(0,0,0,0.16), 0 0 0 1px rgba(0,0,0,0.08) ;
+    max-width: 30% !important ;
+    min-width:400px !important ;
+    margin-top:10%;
+    border-radius: 10px;
+
+}
+
+.passwordContainerStyle{
+  margin-top:8%;
+  border-top-left-radius:15px ;
+  border-bottom-left-radius:15px ;
+  border-Bottom-Right-Radius:50px ;
+  border-Top-Right-Radius:50px ;
+  box-shadow: 0 .125rem .25rem  rgba(0,0,0,.075)!important ;
+  overflow:hidden;
+}
+
+.usernameContainerStyle{
+    border-top-left-radius:15px ;
+    border-bottom-left-radius:15px ;
+    border-Bottom-Right-Radius:50px ;
+    border-Top-Right-Radius:50px ;
+    box-shadow: 0 .125rem .25rem  rgba(0,0,0,.075)!important ;
+    overflow:hidden;
+
+}
+
+@media  only screen and (max-width: 600px){
+    .containerStyle{
+        margin-Top: 50% !important;
+        padding: 2% ;
+        box-Shadow: none !important;
+        min-width:100% !important ;
+    }
+  
+}
