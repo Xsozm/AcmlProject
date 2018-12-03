@@ -16,12 +16,12 @@ class Header extends Component {
     }
 
     componentWillMount(){
-      window.addEventListener('resize', this.resizeScreen.bind(this));;
+      window.addEventListener('resize', this.resizeScreen.bind(this));
     }
 
-    componentWillUpdate(nextProps){
+    componentWillReceiveProps(nextProps){
       console.log(nextProps);
-      //nextProps.auth.authnticated ?  this.setState({loggedin:true}):this.setState({loggedin:false})
+      nextProps.auth.authnticated ?  this.setState({loggedin:true}):this.setState({loggedin:false})
 
     }
       resizeScreen(){

@@ -1,22 +1,42 @@
 
 import {FETCH_SEARCH_ITEMS,FETCH_NOTIFICATIONS,
     ADD_NEW_NOTIFICATION,REG_ERR,REG_SUCC,AUTH_EMAIL_ERR,AUTH_OTHER_ERR,AUTH_PASSWORD_ERR,LOADING_REQ,FINISHING_REQ,AUTH_USER} from './types';
-
 import axios from 'axios';
 import {browserHistory} from 'react-router';
 const BASE_URL = 'http://172.20.10.4:8000/api';
+const  headers = {
+    'Access-Control-Allow-Origin': '*',
+    'Accept-Version': 1,
+    'Accept': 'application/json',
+    'Content-Type': 'application/json',
+    'Access-Control-Allow-Methods': 'GET, POST, PATCH, PUT, DELETE, OPTIONS',
+    'Access-Control-Allow-Headers':' Origin, Content-Type, X-Auth-Token',
+    'Authorization': `Bearer ${localStorage.getItem('token')}` }
+   
 
 
 export function searchItems(query){
+    const URL = BASE_URL+'/items/search';
+    const req = axios.get(`${URL}/${query}`);
     return (dispatch) =>{
-      //  dispatch({type:LOADING_REQ})
-                dispatch({type:FETCH_SEARCH_ITEMS,payload:[{name:'1',place:'1'},{name:'2',place:'2'},{name:'3',place:'3'},{name:'4',place:'4'}]})
+      req.then(
+        (res)=>{
+            dispatch({type:FETCH_SEARCH_ITEMS,payload:res})
+        }
+      )
+               
             }
 }
 
 export function submitItem(item){
+    const URL = BASE_URL+'/items';
+    const req = axios({ method: 'POST', url: URL, headers: headers, data: item })
     return (dispatch) =>{
-        console.log(item);
+      req.then(
+          (res)=>{
+            console.log(res);
+          }
+      )
     }
   
 }
@@ -69,6 +89,7 @@ export function LogInUser(data){
         req.then(
             (res)=>{
                 localStorage.setItem('token', res.data.access_token);
+                localStorage.setItem('user', JSON.stringify(res.data.user));
                 browserHistory.push('/');
                  dispatch({type:AUTH_USER});
 
