@@ -9,9 +9,12 @@ WORKDIR /usr/src/app
 ENV PATH /usr/src/app/node_modules/.bin:$PATH
 
 # install and cache app dependencies
-COPY . .
-RUN npm install --silent
-RUN npm install react-scripts@1.1.4 -g --silent
+COPY package.json /usr/src/app/
+RUN npm install
+
+ADD src /usr/src/app/src
+ADD public /usr/src/app/public
+
 
 # start app
 CMD ["npm", "start"]
