@@ -49,12 +49,13 @@ export function submitNewItem(item){
 
 export function requestItem(item){
 
-    const URL = `${BASE_URL}/items/${item.id}/request`;
+    const URL = `${BASE_URL}/hazem/request`;
     const user = JSON.parse(localStorage.getItem('user'));
-    const req = axios({ method: 'POST', url: URL, headers: headers, data: item })
+    const req = axios({ method: 'POST', url: URL, headers: headers, data: {item_id:item.id} })
     return (dispatch) =>{
       req.then(
           (res)=>{
+              console.log(res);
             browserHistory.push("/");
             alert("your item was submitted");
           }
@@ -115,7 +116,7 @@ export function LogInUser(data){
                 localStorage.clear();
                 console.log(res);
                 if(res.data.token!==undefined){
-                    localStorage.setItem('token', res.data.token.access_token);
+                    localStorage.setItem('token', res.data.token.original.access_token);
                     localStorage.setItem('user', JSON.stringify(res.data.user));
                 }
                 browserHistory.push('/');
