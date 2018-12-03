@@ -1,9 +1,9 @@
 
 import {FETCH_SEARCH_ITEMS,FETCH_NOTIFICATIONS,
-    ADD_NEW_NOTIFICATION,REG_ERR,REG_SUCC,AUTH_EMAIL_ERR,AUTH_OTHER_ERR,AUTH_PASSWORD_ERR,LOADING_REQ,FINISHING_REQ,AUTH_USER} from './types';
+    ADD_NEW_NOTIFICATION,REG_ERR,REG_SUCC,AUTH_EMAIL_ERR,AUTH_OTHER_ERR,AUTH_PASSWORD_ERR,LOADING_REQ,FINISHING_REQ,AUTH_USER, DEAUTH_USER} from './types';
 import axios from 'axios';
 import {browserHistory} from 'react-router';
-const BASE_URL = 'http://172.20.10.4:8000/api';
+const BASE_URL = 'http://192.168.43.128:8000/api';
 const  headers = {
     'Access-Control-Allow-Origin': '*',
     'Accept-Version': 1,
@@ -21,30 +21,60 @@ export function searchItems(query){
     return (dispatch) =>{
       req.then(
         (res)=>{
-            dispatch({type:FETCH_SEARCH_ITEMS,payload:res})
+            dispatch({type:FETCH_SEARCH_ITEMS,payload:res.data})
         }
+      ).catch(
+          (e)=>{
+            console.log(e);
+          }
       )
                
             }
 }
 
-export function submitItem(item){
+export function submitNewItem(item){
     const URL = BASE_URL+'/items';
+    console.log(localStorage);
     const req = axios({ method: 'POST', url: URL, headers: headers, data: item })
     return (dispatch) =>{
       req.then(
           (res)=>{
-            console.log(res);
+            browserHistory.push("/");
+            alert("your item is requested");
           }
       )
     }
   
 }
 
-export function fetchNotifications(){
+export function requestItem(item){
+
+    const URL = `${BASE_URL}/hazem/request`;
+    const user = JSON.parse(localStorage.getItem('user'));
+    const req = axios({ method: 'POST', url: URL, headers: headers, data: {item_id:item.id} })
     return (dispatch) =>{
-                  dispatch({type:FETCH_NOTIFICATIONS,payload:[{userName:'1',itemName:'1'},{userName:'2',itemName:'2'},{userName:'3',itemName:'3'},{userName:'4',itemName:'4'}]});
-              }
+      req.then(
+          (res)=>{
+              console.log(res);
+            alert("your item was submitted");
+          }
+      )
+    }
+    
+
+
+}
+
+export function fetchNotifications(){
+    const URL = `${BASE_URL}/notifications`;
+    const req = axios({ method: 'POST', url: URL, headers: headers, data: null })
+    return (dispatch) =>{
+      req.then(
+          (res)=>{
+            dispatch({type:FETCH_NOTIFICATIONS,payload:res.data});
+          }
+      )
+    }
 }
 
 export function fetchNewNotification(notification){
@@ -88,8 +118,12 @@ export function LogInUser(data){
         dispatch({type:LOADING_REQ})
         req.then(
             (res)=>{
-                localStorage.setItem('token', res.data.access_token);
-                localStorage.setItem('user', JSON.stringify(res.data.user));
+                localStorage.clear();
+                console.log(res);
+                if(res.data.token!==undefined){
+                    localStorage.setItem('token', res.data.token.original.access_token);
+                    localStorage.setItem('user', JSON.stringify(res.data.user));
+                }
                 browserHistory.push('/');
                  dispatch({type:AUTH_USER});
 
@@ -115,5 +149,11 @@ export function LogInUser(data){
         }).then(()=>{
             dispatch({type:FINISHING_REQ})
         })
+    }
+}
+
+export function  logoutUser(){
+    return(dispatch)=>{
+        dispatch({type:DEAUTH_USER});
     }
 }

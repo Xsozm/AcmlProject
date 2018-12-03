@@ -2,7 +2,7 @@ import React , {Component} from 'react';
 import {connect} from 'react-redux';
 import { browserHistory} from 'react-router';
 
-export default function (compositeComponent) {
+export default function (CompositeComponent) {
     class RequireAuth extends Component{
         componentWillMount(){
             if(!this.props.auth.authnticated){
@@ -16,7 +16,7 @@ export default function (compositeComponent) {
         }
         render(){
             return(
-                <compositeComponent {...this.props} />
+                <CompositeComponent {...this.props} />
             )
         }
     }

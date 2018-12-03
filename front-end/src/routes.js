@@ -13,8 +13,8 @@ const routes =
 <Route path="/" component={App}>
     <IndexRoute  component={Main} />
     <Route path="/search/:query" component={Search} />
-    <Route path="/item/submit" component={ItemForm} />
-    <Route path="/notifications" component={Notifications} />
+    <Route path="/item/post" component={rquireAuth(ItemForm)} />
+    <Route path="/notifications" component={rquireAuth(Notifications)} />
     <Route path="/login" component={LogIn} />
     <Route path="/signup" component={RegisterComp} />
 

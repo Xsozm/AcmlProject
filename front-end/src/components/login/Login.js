@@ -23,7 +23,7 @@ class LogIn extends Component{
         return(
             <form  className=" containerStyle  container">
                 <InputField style={emailFieldStyle} className="shadow-sm" isInvalidCond={this.props.auth.emailError ? this.props.auth.emailError[0] : ''  }  onTextChange={this.onEmailTextChange.bind(this)}  element={ <Button style={usernameNoteStyle}   text='@student.guc.edu.eg'/>
-         } row='flex-row' height='40px'  type="text" value={this.state.email} placeholder="Username"  /> 
+         } row='flex-row' height='40px'  type="text" value={this.state.email} placeholder="Email"  /> 
                 <InputField 
                 style={passwordFielStyle }
                 onTextChange={this.onPasswordTextChange.bind(this)} 

@@ -3,7 +3,7 @@ import { Field, reduxForm } from 'redux-form';
 import InputField from '../common/inputField/InputField';
 import Button from '../common/button/Button';
 import submitIcon from '../../assets/Orion_paper-plane.png'
-import {submitItem} from '../../actions/index';
+import {submitNewItem} from '../../actions/index';
 import {Component} from 'react';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
@@ -108,7 +108,7 @@ class ItemForm extends Component {
         data={...data,found:false}
        }
        console.log(data);
-    this.props.submitItem(data);
+    this.props.submitNewItem(data);
 }
  
 }
@@ -150,12 +150,9 @@ const styles={
     }
 }
 
-function mapDispatchtoProps(dispatch){
-    return bindActionCreators({submitItem},dispatch);
 
-}
 
-ItemForm = connect (null,mapDispatchtoProps) (ItemForm)
+ItemForm = connect (null,{submitNewItem}) (ItemForm)
 
 export default reduxForm({
   form: 'fieldLevelValidation' // a unique identifier for this form
