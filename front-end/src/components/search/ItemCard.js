@@ -4,20 +4,22 @@ import requestIcon from '../../assets/Orion_add.png';
 class ItemCard extends Component {
      render(){
          return(
-             <div style ={styles.containerStyle} className = "shadow-sm  ">
+             <div style ={styles.containerStyle} className = "shadow-sm  d-flex">
             
                 <div style={styles.detailsStyle}>
-                    <h6>Name:{this.props.name}</h6>
-                    <h6>Last Seen At:{this.props.place}</h6>
+                <h6>({this.props.found?"found":"lost"})</h6>
+                    <h6>name:{this.props.name}</h6>
+                    <h6>place:{this.props.place}</h6>
+                    <div > 
+                        {this.props.description}
+                 </div>
                     
                 </div>
-                <div  className="d-flex justify-content-center "> 
-                {this.props.description}
-                 </div>
+               
                  <div className="d-flex flex-row align-items-end  bg-white  justify-content-center">
-                     <div className=" p-2 " >
+                     <div className=" p-5 " >
                      <Button hasborder={true} clickable={true} 
-                    img={<div className=" align-items-center justify-content-center d-flex shadow-sm" style={{borderRadius: '50%',width:'30px',height:'30px'}}>
+                    img={<div className=" align-items-center justify-content-center d-flex shadow-sm" style={{margin:'1%',borderRadius: '50%',width:'30px',height:'30px'}}>
                      <img width="24px" height="24px" src={requestIcon} /></div>}/>
                      </div>
             </div>

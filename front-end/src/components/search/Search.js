@@ -35,7 +35,7 @@ class Search extends Component{
     renderItems = () =>{
         return this.props.searchQuery.items.map(
             (item)=>{
-                return (<ItemCard key={item.name} name={item.name} place={item.place} description={item.description}/>)
+                return (<ItemCard key={item.name} name={item.name} place={item.place} description={item.description} found={item.found}/>)
             }
         )
     }
