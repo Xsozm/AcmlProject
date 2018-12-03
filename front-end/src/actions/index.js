@@ -21,7 +21,6 @@ export function searchItems(query){
     return (dispatch) =>{
       req.then(
         (res)=>{
-            console.log(res);
             dispatch({type:FETCH_SEARCH_ITEMS,payload:res.data})
         }
       ).catch(
@@ -39,7 +38,8 @@ export function submitItem(item){
     return (dispatch) =>{
       req.then(
           (res)=>{
-            console.log(res);
+            browserHistory.push("/");
+            prompt("your item was submitted");
           }
       )
     }

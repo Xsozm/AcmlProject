@@ -8,8 +8,8 @@ import {searchItems} from '../../actions/index'
 class Search extends Component{
     state = {items:[]}
     componentWillMount(){
-        console.log(this.props.params);
-        this.props.searchItems(this.props.params.query);
+        this.props.searchItems(this.props.params.query)
+       
         if(this.props.searchQuery.items)
         this.setState({items:this.props.searchQuery.items})
       
@@ -21,6 +21,7 @@ class Search extends Component{
   
       }
     render() {
+        console.log(this.props);
         return(
             <div>
                  <style>{'body { background-color: #F8F9F9}'}</style>
@@ -32,7 +33,7 @@ class Search extends Component{
     }
 
     renderItems = () =>{
-        return this.state.items.map(
+        return this.props.searchQuery.items.map(
             (item)=>{
                 return (<ItemCard key={item.name} name={item.name} place={item.place} description={item.description}/>)
             }
