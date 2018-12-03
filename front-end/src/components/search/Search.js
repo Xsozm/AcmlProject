@@ -3,12 +3,15 @@ import './search.style.css';
 import ItemCard from './ItemCard';
 import {Component} from 'react';
 import {connect} from 'react-redux';
+import {bindActionCreators} from 'redux';
+import {searchItems} from '../../actions/index'
 class Search extends Component{
     state = {items:[]}
     componentWillMount(){
+        console.log(this.props.params);
+        this.props.searchItems(this.props.params.query);
         if(this.props.searchQuery.items)
         this.setState({items:this.props.searchQuery.items})
-      console.log(this.props);
       
     }
 
@@ -31,8 +34,7 @@ class Search extends Component{
     renderItems = () =>{
         return this.state.items.map(
             (item)=>{
-                console.log(item);
-                return (<ItemCard key={item.name} name={item.name} place={item.place}/>)
+                return (<ItemCard key={item.name} name={item.name} place={item.place} description={item.description}/>)
             }
         )
     }
@@ -44,4 +46,4 @@ function mapStateToProps(state){
 
     
 
-export default connect(mapStateToProps)(Search);
+export default connect(mapStateToProps,{searchItems})(Search);

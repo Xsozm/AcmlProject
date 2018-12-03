@@ -11,7 +11,8 @@ class ItemCard extends Component {
                     <h6>Last Seen At:{this.props.place}</h6>
                     
                 </div>
-                <div style={styles.TagContainerStyle} className="d-flex  flex-wrap flex-row"> 
+                <div  className="d-flex justify-content-center "> 
+                {this.props.description}
                  </div>
                  <div className="d-flex flex-row align-items-end  bg-white  justify-content-center">
                      <div className=" p-2 " >

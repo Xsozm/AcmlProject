@@ -3,7 +3,7 @@ import {FETCH_SEARCH_ITEMS,FETCH_NOTIFICATIONS,
     ADD_NEW_NOTIFICATION,REG_ERR,REG_SUCC,AUTH_EMAIL_ERR,AUTH_OTHER_ERR,AUTH_PASSWORD_ERR,LOADING_REQ,FINISHING_REQ,AUTH_USER} from './types';
 import axios from 'axios';
 import {browserHistory} from 'react-router';
-const BASE_URL = 'http://172.20.10.4:8000/api';
+const BASE_URL = 'http://192.168.43.128:8000/api';
 const  headers = {
     'Access-Control-Allow-Origin': '*',
     'Accept-Version': 1,
@@ -21,8 +21,13 @@ export function searchItems(query){
     return (dispatch) =>{
       req.then(
         (res)=>{
-            dispatch({type:FETCH_SEARCH_ITEMS,payload:res})
+            console.log(res);
+            dispatch({type:FETCH_SEARCH_ITEMS,payload:res.data})
         }
+      ).catch(
+          (e)=>{
+            console.log(e);
+          }
       )
                
             }
