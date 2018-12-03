@@ -1,6 +1,6 @@
 
 import {FETCH_SEARCH_ITEMS,FETCH_NOTIFICATIONS,
-    ADD_NEW_NOTIFICATION,REG_ERR,REG_SUCC,AUTH_EMAIL_ERR,AUTH_OTHER_ERR,AUTH_PASSWORD_ERR,LOADING_REQ,FINISHING_REQ,AUTH_USER} from './types';
+    ADD_NEW_NOTIFICATION,REG_ERR,REG_SUCC,AUTH_EMAIL_ERR,AUTH_OTHER_ERR,AUTH_PASSWORD_ERR,LOADING_REQ,FINISHING_REQ,AUTH_USER, DEAUTH_USER} from './types';
 import axios from 'axios';
 import {browserHistory} from 'react-router';
 const BASE_URL = 'http://192.168.43.128:8000/api';
@@ -32,18 +32,37 @@ export function searchItems(query){
             }
 }
 
-export function submitItem(item){
+export function submitNewItem(item){
     const URL = BASE_URL+'/items';
+    console.log(localStorage);
     const req = axios({ method: 'POST', url: URL, headers: headers, data: item })
     return (dispatch) =>{
       req.then(
           (res)=>{
             browserHistory.push("/");
-            prompt("your item was submitted");
+            alert("your item is requested");
           }
       )
     }
   
+}
+
+export function requestItem(item){
+
+    const URL = `${BASE_URL}/items/${item.id}/request`;
+    const user = JSON.parse(localStorage.getItem('user'));
+    const req = axios({ method: 'POST', url: URL, headers: headers, data: item })
+    return (dispatch) =>{
+      req.then(
+          (res)=>{
+            browserHistory.push("/");
+            alert("your item was submitted");
+          }
+      )
+    }
+    
+
+
 }
 
 export function fetchNotifications(){
@@ -93,8 +112,12 @@ export function LogInUser(data){
         dispatch({type:LOADING_REQ})
         req.then(
             (res)=>{
-                localStorage.setItem('token', res.data.access_token);
-                localStorage.setItem('user', JSON.stringify(res.data.user));
+                localStorage.clear();
+                console.log(res);
+                if(res.data.token!==undefined){
+                    localStorage.setItem('token', res.data.token.access_token);
+                    localStorage.setItem('user', JSON.stringify(res.data.user));
+                }
                 browserHistory.push('/');
                  dispatch({type:AUTH_USER});
 
@@ -120,5 +143,11 @@ export function LogInUser(data){
         }).then(()=>{
             dispatch({type:FINISHING_REQ})
         })
+    }
+}
+
+export function  logoutUser(){
+    return(dispatch)=>{
+        dispatch({type:DEAUTH_USER});
     }
 }

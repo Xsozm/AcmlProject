@@ -7,7 +7,7 @@ import sideBarArrow from '../../assets/Orion_angle-down.png'
 import {connect} from 'react-redux';
 import './Header.style.css'
 import {bindActionCreators} from 'redux';
-import {searchItems} from '../../actions/index';
+import {searchItems,logoutUser} from '../../actions/index';
 
 class Header extends Component {
     state = {loggedin:false,sideBarOpen:false,clientWidth:document.documentElement.clientWidth,searchText:''};
@@ -98,7 +98,7 @@ class Header extends Component {
 
   logout = () =>{
     localStorage.clear();
-    this.setState({loggedin:false});
+    this.props.logoutUser();
   }
 
   openSideBar = (e) =>{
@@ -135,7 +135,7 @@ function mapStateToProps(state){
 }
 
 function mapDispatchtoProps(dispatch){
-    return bindActionCreators({searchItems},dispatch);
+    return bindActionCreators({searchItems,logoutUser},dispatch);
 
 }
 
