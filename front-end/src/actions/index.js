@@ -56,7 +56,6 @@ export function requestItem(item){
       req.then(
           (res)=>{
               console.log(res);
-            browserHistory.push("/");
             alert("your item was submitted");
           }
       )
@@ -67,9 +66,15 @@ export function requestItem(item){
 }
 
 export function fetchNotifications(){
+    const URL = `${BASE_URL}/notifications`;
+    const req = axios({ method: 'POST', url: URL, headers: headers, data: null })
     return (dispatch) =>{
-                  dispatch({type:FETCH_NOTIFICATIONS,payload:[{userName:'1',itemName:'1'},{userName:'2',itemName:'2'},{userName:'3',itemName:'3'},{userName:'4',itemName:'4'}]});
-              }
+      req.then(
+          (res)=>{
+            dispatch({type:FETCH_NOTIFICATIONS,payload:res.data});
+          }
+      )
+    }
 }
 
 export function fetchNewNotification(notification){
